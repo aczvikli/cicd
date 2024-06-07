@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build or simulate building
-        run: sleep 5
+        run: sleep 1
 
       - name: Finish building
         run: echo "Build completed successfully"
@@ -24,7 +24,7 @@ jobs:
   deploy_dev:
     strategy:
       matrix:
-        env: [acc, dev, prod]
+        env: [dev, acc, prod]
       max-parallel: 1
     needs: build-and-push
     runs-on: ubuntu-latest
