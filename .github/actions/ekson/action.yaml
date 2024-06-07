@@ -1,0 +1,13 @@
+name: 'Hi from Greg'
+description: 'Greet the people of KBC'
+inputs:
+  input:
+    description: 'Names of the people to greet'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Print Greeting
+      run: |
+        echo "Hello, ${{ inputs.input }}!"
+      shell: bash
