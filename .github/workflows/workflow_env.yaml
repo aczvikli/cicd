@@ -23,6 +23,7 @@ jobs:
   # to different environments with manual approvals
   deploy_dev:
     strategy:
+      fail-fast: true
       matrix:
         env: [dev, acc, prod]
       max-parallel: 1
