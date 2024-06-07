@@ -24,7 +24,8 @@ jobs:
   deploy_dev:
     strategy:
       matrix:
-        env: [dev, acc, prod]
+        env: [dev, acc, prod,]
+      max-parallel: 1
     needs: build-and-push
     runs-on: ubuntu-latest
     environment: ${{ matrix.env }}
