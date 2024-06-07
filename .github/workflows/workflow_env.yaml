@@ -22,23 +22,12 @@ jobs:
   # Chain the next job to the previous one and make it deploy
   # to different environments with manual approvals
   deploy_dev:
+    strategy:
+    matrix:
+      env: [dev, acc, prod]
     needs: build-and-push
     runs-on: ubuntu-latest
-    environment: dev
+    environment: {{ matrix.env }}
     steps:
       - name: deploy
         run: echo dev
-  deploy_acc:
-    needs: deploy_dev
-    runs-on: ubuntu-latest
-    environment: acc
-    steps:
-      - name: deploy
-        run: echo acc
-  deploy_prod:
-    needs: deploy_acc
-    runs-on: ubuntu-latest
-    environment: prod
-    steps:
-      - name: deploy
-        run: echo prod
