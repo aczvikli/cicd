@@ -24,5 +24,5 @@ jobs:
         with:
           context: exercise_3
           push: true
-          tags: 0.1.0
+          tags: latest
           labels: latest
