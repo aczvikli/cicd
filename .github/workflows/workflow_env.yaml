@@ -27,7 +27,7 @@ jobs:
         env: [dev, acc, prod]
     needs: build-and-push
     runs-on: ubuntu-latest
-    environment: {{ matrix.env }}
+    environment: ${{ matrix.env }}
     steps:
       - name: deploy
         run: echo dev
