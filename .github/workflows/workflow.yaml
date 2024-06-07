@@ -23,7 +23,7 @@ jobs:
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
-          file: ./excercise_3/Dockerfile
+          file: ./exercise_3/Dockerfile
           push: true
           tags: 0.1.0
           labels: latest
