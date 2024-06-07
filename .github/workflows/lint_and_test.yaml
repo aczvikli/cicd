@@ -1,0 +1,61 @@
+name: Python CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - id: test
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    # Add step to install dependencies
+    - run: pip install pytest
+    - run: pytest
+
+  lint:
+    # Complete the lint job configuration
+    runs-on: ubuntu-latest
+    steps:
+    - id: lint
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: pip install flake8
+    - run: flake8
+
+  badge_success:
+    needs: [test, lint]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sed -i 's/tests-unknown-lightgrey/tests-passing-green/' README.md
+          git config --global user.email "czv@example.com"
+          git config --global user.name "czv"
+          git add README.md
+          git commit --amend --no-edit
+          git push origin main
+
+  badge_failure:
+    needs: [test, lint]
+    if: ${{ always() && contains(needs.*.result, 'failure') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sed -i 's/tests-unknown-lightgrey/tests-failing-red/' README.md
+          git pull
+          git config --global user.email "czv@example.com"
+          git config --global user.name "czv"
+          git add README.md
+          git commit --amend --no-edit
+          git push -f origin main
