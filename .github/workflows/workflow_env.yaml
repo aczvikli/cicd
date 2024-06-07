@@ -23,8 +23,8 @@ jobs:
   # to different environments with manual approvals
   deploy_dev:
     strategy:
-    matrix:
-      env: [dev, acc, prod]
+      matrix:
+        env: [dev, acc, prod]
     needs: build-and-push
     runs-on: ubuntu-latest
     environment: {{ matrix.env }}
