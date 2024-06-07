@@ -21,7 +21,7 @@ jobs:
 
   # Chain the next job to the previous one and make it deploy
   # to different environments with manual approvals
-  deploy_dev:
+  deploy:
     strategy:
       fail-fast: true
       matrix:
